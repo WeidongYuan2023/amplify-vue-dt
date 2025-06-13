@@ -10,6 +10,8 @@ frontend:
     preBuild:
       commands:
         - echo "Installing dependencies..."
+        - nvm install 20
+        - nvm use 20
         - npm ci --cache .npm --prefer-offline --include=dev
     build:
       commands:
