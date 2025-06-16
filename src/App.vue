@@ -9,10 +9,12 @@
       >
         <template v-slot="{ user }">
           <div class="auth-success">
-            <h2>认证成功！</h2>
-            <div class="app-buttons">
-              <button @click="goToHome" class="app-button">Museum</button>
-              <button @click="goToDigitalTwin" class="app-button">Digital Twin</button>
+            <div class="content-box">
+              <div class="welcome-text">Welcome to FOXX NEXUS Digital Twins</div>
+              <div class="app-buttons">
+                <button @click="goToHome" class="app-button digital-twin-button">Museum</button>
+                <button @click="goToDigitalTwin" class="app-button digital-twin-button">Digital Twin</button>
+              </div>
             </div>
           </div>
         </template>
@@ -80,10 +82,29 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
+  background-image: url('@/assets/loginback.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
-.auth-success h2 {
-  margin-bottom: 20px;
+.content-box {
+  background-color: rgba(255, 255, 255, 0.85); /* 白色半透明背景框 */
+  border-radius: 12px; /* 圆角 */
+  padding: 30px; /* 内边距 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 阴影效果 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* 文字和按钮之间的间距 */
+}
+
+.welcome-text {
+  color: #333; /* 深色文字以适应白色背景 */
+  font-size: 24px; /* 稍大的字体 */
+  font-weight: bold; /* 加粗 */
+  text-align: center;
 }
 
 .app-buttons {
@@ -92,16 +113,31 @@ body {
 }
 
 .app-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
+  padding: 12px 30px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  color: white;
   cursor: pointer;
-  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
-.app-button:hover {
-  background-color: #45a049;
+.museu-button {
+  background-color: rgba(76, 175, 80, 0.9);
+}
+
+.museu-button:hover {
+  background-color: rgba(76, 175, 80, 1);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.7);
+}
+
+.digital-twin-button {
+  background-color: rgba(33, 150, 243, 0.9);
+}
+
+.digital-twin-button:hover {
+  background-color: rgba(33, 150, 243, 1);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.7);
 }
 </style>
