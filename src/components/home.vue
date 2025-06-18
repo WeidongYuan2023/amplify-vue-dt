@@ -1,37 +1,20 @@
 <template>
-  <div>
-    <template v-if="isAuthenticated">
-      <div class="authenticated-container">
-        <router-view />
-      </div>
-    </template>
-    <template v-else>
-      <Authenticator 
-        :sign-up-attributes="['email', 'name', 'given_name', 'family_name']"
-      >
-        <template v-slot="{ user }">
           <div class="auth-success">
             <div class="content-box">
               <div class="welcome-text">Welcome to FOXX NEXUS Digital Twins</div>
               <div class="app-buttons">
                 <button @click="goToMuseum" class="app-button digital-twin-button">Museum</button>
                 <button @click="goToDigitalTwin" class="app-button digital-twin-button">Digital Twin</button>
-<!--                <button @click="signOut" class="app-button logout-button">Logout</button>-->
               </div>
             </div>
           </div>
-        </template>
-      </Authenticator>
-    </template>
-  </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { getCurrentUser, signOut } from 'aws-amplify/auth'; 
 import { useRouter } from 'vue-router';
 import { Authenticator } from '@aws-amplify/ui-vue';
-
 const router = useRouter();
 const isAuthenticated = ref(false);
 
@@ -86,7 +69,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background-image: url('@/assets/loginback.jpg');
+  background-image: url('../assets/loginback.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -91,7 +91,8 @@
                     <SvgIcon name="tree-node" class="menu-icon" />
                     <span>Office</span>
                 </div>
-
+                <div class="menu-item" @click="gohome">Home</div>
+                <div class="menu-item" @click="logout">Logout</div>
             </div>
         </div>
     </transition>
@@ -102,6 +103,13 @@ import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import { useTime } from '@/composables/useTime'
 import SvgIcon from '@/components/features/SvgIcon.vue';
 import { modelStore } from '@/store/index';
+import { signOut } from '@aws-amplify/auth';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+
+
 const model = modelStore();
 
 interface WeatherInfo {
@@ -181,6 +189,27 @@ watch(timeInfo, () => {
 onUnmounted(() => {
 
 });
+
+// 包装登出方法，确保安全退出并跳转
+const logout = async () => {
+  try {
+    await signOut();
+    setTimeout(() => { window.location.reload(); }, 1000);
+  } catch (error) {
+    console.error('Logout failed:', error);
+    alert('Logout failed. Please try again.');
+  }
+};
+
+const gohome = async () => {
+  try {
+    setTimeout(() => { window.location.replace('/'); }, 1000);
+  } catch (error) {
+    console.error('Home failed:', error);
+    alert('Home failed. Please try again.');
+  }
+};
+
 </script>
 
 <style scoped lang="scss">
