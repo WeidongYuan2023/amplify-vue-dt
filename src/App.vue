@@ -16,7 +16,7 @@
               <div class="app-buttons">
                 <button @click="goToMuseum" class="app-button digital-twin-button">Museum</button>
                 <button @click="goToDigitalTwin" class="app-button digital-twin-button">Digital Twin</button>
-<!--                <button @click="signOut" class="app-button logout-button">Logout</button>-->
+                <button @click="signOut" class="app-button logout-button">Logout</button>
               </div>
             </div>
           </div>

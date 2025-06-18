@@ -5,6 +5,7 @@
               <div class="app-buttons">
                 <button @click="goToMuseum" class="app-button digital-twin-button">Museum</button>
                 <button @click="goToDigitalTwin" class="app-button digital-twin-button">Digital Twin</button>
+                <button @click="handleSignOut" class="app-button logout-button">Logout</button>
               </div>
             </div>
           </div>
@@ -42,6 +43,17 @@ const goToMuseum = () => {
 const goToDigitalTwin = () => {
   isAuthenticated.value = true;
   router.push('/digital-twin');
+};
+// 处理登出
+const handleSignOut = async (event: MouseEvent) => {
+  event.preventDefault(); // 防止默认行为（如表单提交等）
+  try {
+    await signOut(); // 调用 AWS Amplify 的 signOut
+    isAuthenticated.value = false; // 更新认证状态
+    setTimeout(() => { window.location.replace('/'); }, 1000);
+  } catch (error) {
+    console.error('Sign out failed', error);
+  }
 };
 </script>
 
