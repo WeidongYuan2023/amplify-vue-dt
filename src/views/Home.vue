@@ -1,114 +1,146 @@
 <template>
-  <div class="home-container">
-    <div class="hero-section">
-      <h1>Welcome to 3D Museum</h1>
-      <p>Explore our interactive museum experience and digital twin technology</p>
-      <router-link to="/digital-twin" class="cta-button">Explore Digital Twin</router-link>
-    </div>
-    
-    <div class="features-section">
-      <div class="feature-card">
-        <div class="icon">🏛️</div>
-        <h3>Virtual Museum</h3>
-        <p>Experience our museum from anywhere in the world</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="icon">🔍</div>
-        <h3>Interactive Exhibits</h3>
-        <p>Engage with exhibits through our digital platform</p>
-      </div>
-      
-      <div class="feature-card">
-        <div class="icon">🌐</div>
-        <h3>Digital Twin</h3>
-        <p>Explore our building's digital representation</p>
-      </div>
-    </div>
-  </div>
+          <div class="auth-success">
+            <div class="content-box">
+              <div class="welcome-text">Welcome to FOXX NEXUS Digital Twins</div>
+              <div class="app-buttons">
+                <button @click="goToMuseum" class="app-button digital-twin-button">Museum</button>
+                <button @click="goToDigitalTwin" class="app-button digital-twin-button">Digital Twin</button>
+                <button @click="handleSignOut" class="app-button logout-button">Logout</button>
+              </div>
+            </div>
+          </div>
 </template>
 
-<script setup>
-// Home component logic
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import { getCurrentUser, signOut } from 'aws-amplify/auth'; 
+import { useRouter } from 'vue-router';
+import { useLoadingStore } from '@/store/loading';
+
+const loadingStore = useLoadingStore();
+const router = useRouter();
+
+onMounted(() => {
+ 
+});
+
+const goToMuseum = () => {
+  //router.push('/museum');
+  window.location.href='/museum';
+};
+
+const goToDigitalTwin = () => {
+  //router.push('/digital-twin');
+  window.location.href='/digital-twin';
+};
+// 处理登出
+const handleSignOut = async (event: MouseEvent) => {
+  event.preventDefault(); // 防止默认行为（如表单提交等）
+  try {
+    loadingStore.showLoading('Logging out...');
+    await signOut(); // 调用 AWS Amplify 的 signOut
+    //isAuthenticated.value = false; // 更新认证状态
+    setTimeout(() => { window.location.href='/'; }, 2000);
+  } catch (error) {
+    console.error('Sign out failed', error);
+	loadingStore.hideLoading(); // 出错时隐藏遮罩
+  }
+};
 </script>
 
-<style scoped>
-.home-container {
-  padding: 2rem;
+<style>
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.hero-section {
-  height: 70vh;
+body {
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.auth-success {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-              url('/assets/1.jpg') no-repeat center center;
+  justify-content: center;
+  padding: 20px;
+  background-image: url('../assets/loginback.jpg');
   background-size: cover;
-  color: white;
-  border-radius: 10px;
-  margin-bottom: 2rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
-.hero-section h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.hero-section p {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  max-width: 600px;
-}
-
-.cta-button {
-  display: inline-block;
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 24px;
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.cta-button:hover {
-  background-color: #45a049;
-}
-
-.features-section {
+.content-box {
+  background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+  border-radius: 12px; /* Rounded corners */
+  padding: 30px; /* Padding */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow effect */
   display: flex;
-  justify-content: space-between;
-  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Space between text and buttons */
 }
 
-.feature-card {
-  flex: 1;
-  background-color: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.welcome-text {
+  color: #333; /* Dark text for white background */
+  font-size: 24px; /* Larger font size */
+  font-weight: bold; /* Bold */
   text-align: center;
-  transition: transform 0.3s;
 }
 
-.feature-card:hover {
-  transform: translateY(-5px);
+.app-buttons {
+  display: flex;
+  gap: 20px;
 }
 
-.icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.app-button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.feature-card h3 {
-  margin-bottom: 1rem;
-  color: #333;
+.digital-twin-button {
+  background-color: rgba(33, 150, 243, 0.9);
 }
 
-.feature-card p {
-  color: #666;
+.digital-twin-button:hover {
+  background-color: rgba(33, 150, 243, 1);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.7);
 }
-</style> 
+
+.authenticated-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.logout-button {
+  background-color: rgba(244, 67, 54, 0.9);
+}
+
+.logout-button:hover {
+  background-color: rgba(244, 67, 54, 1);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(244, 67, 54, 0.7);
+}
+</style>

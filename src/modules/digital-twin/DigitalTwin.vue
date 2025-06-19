@@ -40,8 +40,8 @@
     <div class="timer">
       <TimeDisplay />
     </div>
-    <div class="homer" @click="gohome">Home</div>
-    <div class="logouter" @click="logout">Logout</div>
+    <div class="homer "  @click="gohome">Home</div>
+    <div class="logouter  " @click="logout">Logout</div>
 
     <el-dialog v-model="dialogVisible" title="View gallery" width="800">
       <el-carousel :key="carouselKey" :interval="0" arrow="always">
@@ -68,7 +68,9 @@ import RightContent from './components/three/features/right-panel/index.vue';
 import { useVisualizationStore } from '@/store/modules/visualization';
 import { signOut } from '@aws-amplify/auth';
 import { useRouter } from 'vue-router';
+import { useLoadingStore } from '@/store/loading';
 
+const loadingStore = useLoadingStore();
 const router = useRouter();
 
 const visualStore = useVisualizationStore();
@@ -133,14 +135,16 @@ const handleModuleChange = (index) => {
 onMounted(() => {
   // Initialize any necessary data or setup
 });
-// 包装登出方法，确保安全退出并跳转
+
 const logout = async () => {
   try {
+    loadingStore.showLoading('Logging out...');
     await signOut();
-    setTimeout(() => { window.location.reload(); }, 1000);
+    setTimeout(() => { window.location.href='/'; }, 2000);
   } catch (error) {
     console.error('Logout failed:', error);
     alert('Logout failed. Please try again.');
+	loadingStore.hideLoading(); // 出错时隐藏遮罩
   }
 };
 const gohome = async () => {
@@ -291,4 +295,5 @@ const gohome = async () => {
   height: 100%;
   object-fit: contain;
 }
+
 </style> 

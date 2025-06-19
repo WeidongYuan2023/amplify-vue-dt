@@ -71,6 +71,10 @@
     <transition name="fade">
         <div class="navigation-menu" v-if="!showLogo">
             <div class="menu-container shadow">
+				<div class="menu-item" @click="gohome">
+                    <SvgIcon name="tree-node" class="menu-icon" />
+                    <span>Home</span>
+				</div>
                 <div class="menu-item" @click="change('museum')"
                     :class="{ 'active': model.currentScene.name == 'museum' }">
                     <SvgIcon name="tree-node" class="menu-icon" />
@@ -91,8 +95,10 @@
                     <SvgIcon name="tree-node" class="menu-icon" />
                     <span>Office</span>
                 </div>
-                <div class="menu-item" @click="gohome">Home</div>
-                <div class="menu-item" @click="logout">Logout</div>
+                <div class="menu-item" @click="logout">
+                    <SvgIcon name="tree-node" class="menu-icon" />
+                    <span>Logout</span>				
+				</div>
             </div>
         </div>
     </transition>
@@ -105,7 +111,9 @@ import SvgIcon from '@/components/features/SvgIcon.vue';
 import { modelStore } from '@/store/index';
 import { signOut } from '@aws-amplify/auth';
 import { useRouter } from 'vue-router';
+import { useLoadingStore } from '@/store/loading';
 
+const loadingStore = useLoadingStore();
 const router = useRouter();
 
 
@@ -193,21 +201,18 @@ onUnmounted(() => {
 // 包装登出方法，确保安全退出并跳转
 const logout = async () => {
   try {
+    loadingStore.showLoading('Logging out...');
     await signOut();
-    setTimeout(() => { window.location.reload(); }, 1000);
+    setTimeout(() => { window.location.href='/'; }, 2000);
   } catch (error) {
     console.error('Logout failed:', error);
     alert('Logout failed. Please try again.');
+	loadingStore.hideLoading(); // 出错时隐藏遮罩
   }
 };
 
 const gohome = async () => {
-  try {
-    setTimeout(() => { window.location.replace('/'); }, 1000);
-  } catch (error) {
-    console.error('Home failed:', error);
-    alert('Home failed. Please try again.');
-  }
+  window.location.href='/';
 };
 
 </script>
