@@ -75,17 +75,17 @@
                     <SvgIcon name="tree-node" class="menu-icon" />
                     <span>Home</span>
 				</div>
-                <div class="menu-item" @click="change('museum')"
+<!--                <div class="menu-item" @click="change('museum')"
                     :class="{ 'active': model.currentScene.name == 'museum' }">
                     <SvgIcon name="tree-node" class="menu-icon" />
                     <span>The Museum of Art</span>
-                </div>
+                </div>-->
                 <div class="menu-item" @click="change('morningRoom')"
                     :class="{ 'active': model.currentScene.name == 'morningRoom' }">
                     <SvgIcon name="tree-node" class="menu-icon" />
                     <span>Morning Room</span>
                 </div>
-                <div class="menu-item" @click="change('drawingRoom')"
+<!--                <div class="menu-item" @click="change('drawingRoom')"
                     :class="{ 'active': model.currentScene.name == 'drawingRoom' }">
                     <SvgIcon name="tree-node" class="menu-icon" />
                     <span>Great Drawing Room</span>
@@ -94,7 +94,7 @@
                     :class="{ 'active': model.currentScene.name == 'office' }">
                     <SvgIcon name="tree-node" class="menu-icon" />
                     <span>Office</span>
-                </div>
+                </div>-->
                 <div class="menu-item" @click="logout">
                     <SvgIcon name="tree-node" class="menu-icon" />
                     <span>Logout</span>				
