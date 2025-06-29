@@ -31,7 +31,8 @@ const goToMuseum = () => {
 
 const goToDigitalTwin = () => {
   //router.push('/digital-twin');
-  window.location.href='/digital-twin';
+  // window.location.href='/digital-twin';
+  window.location.href='/newDigitalTwin';
 };
 // 处理登出
 const handleSignOut = async (event: MouseEvent) => {
