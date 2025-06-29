@@ -1,8 +1,9 @@
 import { createApp } from 'vue'
+import './style.scss'
 import './assets/styles/style.scss'
 import App from './App.vue'
 import { createPinia } from 'pinia'
-import router from './router'
+import router from './router/index'
 
 // 导入Amplify和Amplify UI
 import { Amplify } from 'aws-amplify'

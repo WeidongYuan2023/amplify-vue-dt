@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import svgLoader from 'vite-svg-loader';
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import AutoImport from 'unplugin-auto-import/vite'
 
 export default defineConfig(({ command, mode }) => {
   // 加载环境变量
@@ -31,7 +32,14 @@ export default defineConfig(({ command, mode }) => {
       svgoConfig: {
         // 关闭可能删除 <defs> 的优化
         multipass: true,
-        plugins: [
+        plugins: [vue(),
+          AutoImport({
+            imports: [
+              'vue',
+              'vue-router'
+            ],
+            dts: 'src/auto-imports.d.ts' // 自动生成类型声明文件
+          }),
           {
             name: 'preset-default',
             params: {

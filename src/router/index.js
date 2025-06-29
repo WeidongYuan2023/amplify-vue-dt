@@ -20,6 +20,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: () => import('../views/About.vue')
+  },
+  {
+    path: '/newDigitalTwin',
+    name: 'newDigitalTwin',
+    component: () => import('../modules/newDigitalTwin/index.vue')
   }
 ]
 

@@ -29,7 +29,7 @@
   </template>
   
   <script setup lang="ts">
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted,watchEffect } from 'vue';
   import { mainStore } from '@/store/model';
   import { modelStore } from '@/store/index';
 

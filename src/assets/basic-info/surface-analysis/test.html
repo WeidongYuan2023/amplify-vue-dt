@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Sphere Viewer Example</title>
+
+  <!-- 引入 Photo Sphere Viewer 的 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4.3.0/dist/photo-sphere-viewer.min.css">
+
+  <style>
+    /* 让全景容器占满整个屏幕 */
+    #viewer {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 全景图展示的容器 -->
+  <div id="viewer"></div>
+
+  <!-- 引入 Photo Sphere Viewer 的 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4.3.0/dist/photo-sphere-viewer.min.js"></script>
+  
+  <script>
+    // 初始化 Photo Sphere Viewer
+    const viewer = new PhotoSphereViewer.Viewer({
+      container: document.querySelector('#viewer'),
+      panorama: 'path/to/your/panorama.jpg', // 替换成你自己的全景图路径
+      navbar: true, // 显示导航条
+      motion: true, // 开启手势控制
+      defaultLongitude: -Math.PI / 2, // 默认视角（可选）
+      defaultLatitude: Math.PI / 6,  // 默认视角（可选）
+      autoLoad: true // 自动加载
+    });
+  </script>
+  
+</body>
+</html>
