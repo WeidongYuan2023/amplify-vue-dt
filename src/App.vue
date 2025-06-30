@@ -246,7 +246,7 @@ border-top:0px!important;
 }
 .amplify-tabs__item--active, .amplify-tabs__item{
 border-top:0px!important;
-border-buttom:2px!important;
+border-bottom:2px!important;
 margin-top:10px!important;
 }
 .amplify-tabs__panel--active {
