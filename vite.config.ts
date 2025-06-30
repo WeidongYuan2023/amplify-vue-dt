@@ -5,10 +5,12 @@ import svgLoader from 'vite-svg-loader';
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 
+
+
 export default defineConfig(({ command, mode }) => {
   // 加载环境变量
   const env = loadEnv(mode, process.cwd())
-  
+
   // 根据部署目标确定基础路径
   const getBasePath = () => {
     // 如果是 API Gateway 部署（通过环境变量标识）
@@ -22,24 +24,17 @@ export default defineConfig(({ command, mode }) => {
     // 默认使用根路径（适用于 Amplify 直接部署）
     return '/';
   };
-  
+
   const basePath = getBasePath();
-  
+
   console.log(`Vite Config - Mode: ${mode}, Deploy Target: ${env.VITE_DEPLOY_TARGET}, Base Path: ${basePath}`);
-  
+
   return {
     plugins: [vue(), svgLoader({
       svgoConfig: {
         // 关闭可能删除 <defs> 的优化
         multipass: true,
-        plugins: [vue(),
-          AutoImport({
-            imports: [
-              'vue',
-              'vue-router'
-            ],
-            dts: 'src/auto-imports.d.ts' // 自动生成类型声明文件
-          }),
+        plugins: [
           {
             name: 'preset-default',
             params: {
@@ -81,7 +76,7 @@ export default defineConfig(({ command, mode }) => {
       extensions: ['.js', '.ts', '.json', '.vue'] // 配置扩展名
     },
     assetsInclude: [
-      '**/*.jpg', '**/*.png', '**/*.svg', '**/*.glb', '**/*.gltf', 
+      '**/*.jpg', '**/*.png', '**/*.svg', '**/*.glb', '**/*.gltf',
       '**/*.fbx', '**/*.obj', '**/*.mtl', '**/*.drc'
     ],
     base: basePath,
