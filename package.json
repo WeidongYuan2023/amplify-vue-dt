@@ -53,6 +53,7 @@
     "less-loader": "^12.2.0",
     "postcss": "^8.4.35",
     "postcss-pxtorem": "^6.1.0",
+    "rollup": "^4.44.1",
     "sass": "^1.86.3",
     "tailwindcss": "^3.4.1",
     "ts-algebra": "2.0.0",
