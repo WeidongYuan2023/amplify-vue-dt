@@ -1737,7 +1737,7 @@ window.addEventListener('beforeunload', () => {
         width: 80%;
         height: 56px;
 
-        background: url('@/assets/Search.png') no-repeat;
+        background: url('/assets/Search.png') no-repeat;
         background-size: 100% 100%;
       }
     }
