@@ -197,7 +197,7 @@ border:0px!important;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 /* 登录框美化 */
