@@ -1956,8 +1956,8 @@ window.addEventListener('beforeunload', () => {
     z-index: 10;
     right: 64px;
     top: 74px;
-    width: 320px;
     height: 24px;
+    display: inline-block;
   }
 
   .floor-stratification {
