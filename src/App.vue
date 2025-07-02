@@ -2,12 +2,10 @@
   <div>
     <template v-if="isAuthenticated">
       <div class="authenticated-container">
-		AUTH
         <router-view />
       </div>
     </template>
     <template v-else>
-	  UN-AUTH
 	  <div class="auth-wrapper">
       <Authenticator 
         :sign-up-attributes="['email', 'name', 'given_name', 'family_name']"
