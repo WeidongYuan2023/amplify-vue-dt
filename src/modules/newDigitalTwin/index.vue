@@ -1668,7 +1668,7 @@ window.addEventListener('beforeunload', () => {
   overflow: hidden;
   box-sizing: border-box;
   font-family: 'Montserrat', Arial, sans-serif;
-  position: absolute;
+  position: relative;
 
   .compass {
     width: 64px;
